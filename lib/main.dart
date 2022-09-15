@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fly_bloc_course/state/cubit/counter/counter_cubit.dart';
-import 'package:fly_bloc_course/ui/screen/counter/counter.dart';
+import 'package:fly_bloc_course/ui/screen/counter_negative_screen.dart';
+import 'package:fly_bloc_course/ui/screen/counter_positive_screen.dart';
+import 'package:fly_bloc_course/ui/screen/counter_screen.dart';
 
 void main() {
   runApp(const FlyBloc());
@@ -10,21 +12,24 @@ void main() {
 class FlyBloc extends StatelessWidget {
   const FlyBloc({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterCubit(),
-      child: MaterialApp(
-        title: 'Fly Bloc Course',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
-            accentColor: Colors.yellowAccent,
-          ),
+    return MaterialApp(
+      title: 'Fly Bloc Course',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blue,
+          accentColor: Colors.yellowAccent,
         ),
-        home: const CounterScreen(),
       ),
+      home: BlocProvider(
+        create: (context) => CounterCubit(),
+        child: const CounterScreen(),
+      ),
+      routes: {
+        CounterPositiveScreen.path: (ctx) => const CounterPositiveScreen(),
+        CounterNegativeScreen.path: (ctx) => const CounterNegativeScreen(),
+      },
     );
   }
 }
