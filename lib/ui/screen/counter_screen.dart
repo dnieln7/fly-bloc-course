@@ -6,6 +6,8 @@ import 'package:fly_bloc_course/ui/screen/counter_positive_screen.dart';
 import 'package:fly_bloc_course/ui/utils/navigation.dart';
 
 class CounterScreen extends StatelessWidget {
+  static const path = '/counter';
+
   const CounterScreen({Key? key}) : super(key: key);
 
   @override
@@ -50,12 +52,12 @@ class CounterScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () =>
-                  Navigation.pushPath(context, CounterPositiveScreen.path),
+                  Navigator.pushNamed(context, CounterPositiveScreen.path),
               child: const Text('To positive'),
             ),
             ElevatedButton(
               onPressed: () =>
-                  Navigation.pushPath(context, CounterNegativeScreen.path),
+                  Navigator.pushNamed(context, CounterNegativeScreen.path),
               child: const Text('To negative'),
             ),
           ],
