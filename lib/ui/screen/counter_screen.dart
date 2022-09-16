@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fly_bloc_course/state/cubit/counter/counter_cubit.dart';
+import 'package:fly_bloc_course/state/cubit/internet/internet_cubit.dart';
 import 'package:fly_bloc_course/ui/screen/counter_negative_screen.dart';
 import 'package:fly_bloc_course/ui/screen/counter_positive_screen.dart';
 import 'package:fly_bloc_course/ui/utils/navigation.dart';
@@ -17,15 +18,25 @@ class CounterScreen extends StatelessWidget {
       body: BlocListener<CounterCubit, CounterState>(
         listener: (context, state) {
           if (state.wasIncremented) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('Incremented!')));
+            print('Incremented');
           } else {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('Decremented!')));
+            print('Decremented');
           }
         },
         child: Column(
           children: [
+            BlocBuilder<InternetCubit, InternetState>(
+              builder: (context, state) {
+                if (state is InternetConnected) {
+                  return Text('Connected to ${state.type}');
+                } else if (state is InternetDisconnected) {
+                  return const Text('No internet connection');
+                } else {
+                  return const LinearProgressIndicator();
+                }
+              },
+            ),
+            const SizedBox(height: 20),
             Row(
               children: [
                 ElevatedButton(
