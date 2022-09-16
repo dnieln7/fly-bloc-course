@@ -15,14 +15,28 @@ class CounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Counter')),
-      body: BlocListener<CounterCubit, CounterState>(
-        listener: (context, state) {
-          if (state.wasIncremented) {
-            print('Incremented');
-          } else {
-            print('Decremented');
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<InternetCubit, InternetState>(
+            listener: (_, state) {
+              if (state is InternetConnected) {
+                BlocProvider.of<CounterCubit>(context).increment(amount: 10);
+              }
+              if (state is InternetDisconnected) {
+                BlocProvider.of<CounterCubit>(context).decrement(amount: 10);
+              }
+            },
+          ),
+          BlocListener<CounterCubit, CounterState>(
+            listener: (_, state) {
+              if (state.wasIncremented) {
+                print('Incremented');
+              } else {
+                print('Decremented');
+              }
+            },
+          ),
+        ],
         child: Column(
           children: [
             BlocBuilder<InternetCubit, InternetState>(

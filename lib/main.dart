@@ -22,7 +22,7 @@ class FlyBloc extends StatelessWidget {
       providers: [
         BlocProvider(create: (ctx) => InternetCubit(connectivity)),
         BlocProvider(
-          create: (ctx) => CounterCubit(BlocProvider.of<InternetCubit>(ctx)),
+          create: (ctx) => CounterCubit(),
         ),
       ],
       child: MaterialApp(
