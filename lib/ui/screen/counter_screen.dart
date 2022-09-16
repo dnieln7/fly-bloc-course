@@ -92,6 +92,16 @@ class CounterScreen extends StatelessWidget {
   }
 }
 
+// Widget.of(context) -> Find the Widget closest to the provided context
+// context have parent, because is widget tree, so it search in context if not found goes to parent and repeats if still not found
+// Navigator.of(context)
+// Only MaterialApp has navigator so the new screen will be created as a child of MaterialApp and be in the same level
+// as the current screen
+
+// When using Provider.of<Type>(context) we specify the type because multiple providers could be found.
+// MultiProvider is just a wrap for nesting providers
+
+
 // Consumer combines listener and builder
 
 // class CounterScreen extends StatelessWidget {
