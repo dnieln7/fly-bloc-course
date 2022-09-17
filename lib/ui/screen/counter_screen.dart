@@ -55,7 +55,7 @@ class CounterScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
+                      context.read<CounterCubit>().decrement();
                     },
                     child: const Text('-')),
                 Expanded(
@@ -69,7 +69,7 @@ class CounterScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: BlocProvider.of<CounterCubit>(context).increment,
+                  onPressed: context.read<CounterCubit>().increment,
                   child: const Text('+'),
                 ),
               ],
@@ -101,7 +101,6 @@ class CounterScreen extends StatelessWidget {
 // When using Provider.of<Type>(context) we specify the type because multiple providers could be found.
 // MultiProvider is just a wrap for nesting providers
 
-
 // Consumer combines listener and builder
 
 // class CounterScreen extends StatelessWidget {
@@ -115,7 +114,7 @@ class CounterScreen extends StatelessWidget {
 //         children: [
 //           ElevatedButton(
 //               onPressed: () {
-//                 BlocProvider.of<CounterCubit>(context).decrement();
+//                 context.read<CounterCubit>().decrement();
 //               },
 //               child: const Text('-')),
 //           Expanded(
@@ -138,7 +137,7 @@ class CounterScreen extends StatelessWidget {
 //             ),
 //           ),
 //           ElevatedButton(
-//               onPressed: BlocProvider.of<CounterCubit>(context).increment,
+//               onPressed: context.read<CounterCubit>().increment,
 //               child: const Text('+')),
 //         ],
 //       ),

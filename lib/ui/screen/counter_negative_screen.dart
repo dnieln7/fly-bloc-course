@@ -23,8 +23,8 @@ class CounterNegativeScreen extends StatelessWidget {
             },
           ),
           ElevatedButton(
-              onPressed: BlocProvider.of<CounterCubit>(context).decrement,
-              child: const Text('-'),
+            onPressed: context.read<CounterCubit>().decrement,
+            child: const Text('-'),
           ),
         ],
       ),

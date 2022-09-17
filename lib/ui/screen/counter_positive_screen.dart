@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fly_bloc_course/state/cubit/internet/internet_cubit.dart';
 
 import '../../state/cubit/counter/counter_cubit.dart';
 
@@ -23,8 +24,27 @@ class CounterPositiveScreen extends StatelessWidget {
             },
           ),
           ElevatedButton(
-            onPressed: BlocProvider.of<CounterCubit>(context).increment,
+            onPressed: context
+                .read<CounterCubit>()
+                .increment, // Same as Provider.of with listen to false
             child: const Text('+'),
+          ),
+          Builder(builder: (ctx) {
+            final value =
+                ctx.select((CounterCubit cubit) => cubit.state.wasIncremented);
+
+            return Text(
+                'new wasIncremented -> $value is different from previous');
+          }),
+          Builder(
+            builder: (ctx) {
+              final counterState = ctx.watch<CounterCubit>().state;
+              final internetState = ctx.watch<InternetCubit>().state;
+
+              return Text(
+                'Counter: ${counterState.value} Internet: ${internetState.toString()}',
+              );
+            },
           ),
         ],
       ),
