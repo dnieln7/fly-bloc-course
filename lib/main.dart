@@ -5,9 +5,20 @@ import 'package:fly_bloc_course/state/cubit/counter/counter_cubit.dart';
 import 'package:fly_bloc_course/state/cubit/internet/internet_cubit.dart';
 import 'package:fly_bloc_course/ui/router/app_router.dart';
 import 'package:fly_bloc_course/ui/screen/counter_screen.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
-  runApp(FlyBloc(Connectivity()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
+  HydratedBlocOverrides.runZoned(
+    () => runApp(FlyBloc(Connectivity())),
+    storage: storage,
+  );
 }
 
 class FlyBloc extends StatelessWidget {
