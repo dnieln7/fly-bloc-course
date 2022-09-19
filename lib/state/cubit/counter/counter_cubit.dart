@@ -27,4 +27,18 @@ class CounterCubit extends HydratedCubit<CounterState> {
   Map<String, dynamic> toJson(CounterState state) {
     return state.toMap();
   }
+
+  // Debug state
+  @override
+  void onChange(Change<CounterState> change) {
+    print('onChange $change');
+    super.onChange(change);
+  }
+
+  // Debug errors inside a cubit
+  // Errors can be throw with addError(Exception("Divide by zero"), StackTrace.current);
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    super.onError(error, stackTrace);
+  }
 }

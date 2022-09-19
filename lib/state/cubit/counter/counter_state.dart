@@ -7,6 +7,11 @@ class CounterState extends Equatable {
   const CounterState(this.value, this.wasIncremented);
 
   @override
+  String toString() {
+    return 'CounterState{value: $value, wasIncremented: $wasIncremented}';
+  }
+
+  @override
   List<Object?> get props => [value, wasIncremented];
 
   Map<String, dynamic> toMap() {
