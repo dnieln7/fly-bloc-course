@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fly_bloc_course/state/cubit/counter/counter_cubit.dart';
 import 'package:fly_bloc_course/state/cubit/internet/internet_cubit.dart';
+import 'package:fly_bloc_course/state/utils/app_bloc_observer.dart';
 import 'package:fly_bloc_course/ui/router/app_router.dart';
 import 'package:fly_bloc_course/ui/screen/counter_screen.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -14,6 +15,8 @@ void main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+
+  // Bloc.observer = AppBlocObserver(); for debug only
 
   HydratedBlocOverrides.runZoned(
     () => runApp(FlyBloc(Connectivity())),
