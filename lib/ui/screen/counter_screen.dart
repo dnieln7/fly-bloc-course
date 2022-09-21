@@ -20,10 +20,14 @@ class CounterScreen extends StatelessWidget {
           BlocListener<InternetCubit, InternetState>(
             listener: (_, state) {
               if (state is InternetConnected) {
-                BlocProvider.of<CounterCubit>(context).increment(amount: 10);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('InternetConnected ${state.type}'))
+                );
               }
               if (state is InternetDisconnected) {
-                BlocProvider.of<CounterCubit>(context).decrement(amount: 10);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('InternetDisconnected'))
+                );
               }
             },
           ),
