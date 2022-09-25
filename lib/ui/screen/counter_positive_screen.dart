@@ -29,16 +29,21 @@ class CounterPositiveScreen extends StatelessWidget {
                 .increment, // Same as Provider.of with listen to false
             child: const Text('+'),
           ),
-          Builder(builder: (ctx) {
-            final value =
-                ctx.select((CounterCubit cubit) => cubit.state.wasIncremented);
-
-            return Text(
-                'new wasIncremented -> $value is different from previous');
-          }),
-          Builder(
+          Builder( // Equivalent of BlocSelector widget
             builder: (ctx) {
-              final counterState = ctx.watch<CounterCubit>().state;
+              final value = ctx.select(
+                (CounterCubit cubit) => cubit.state.wasIncremented,
+              ); // Listen only to a property
+
+              return Text(
+                'new wasIncremented -> $value is different from previous',
+              );
+            },
+          ),
+          Builder( // Equivalent to BlocBuilder
+            builder: (ctx) {
+              final counterState =
+                  ctx.watch<CounterCubit>().state; // Listen all state
               final internetState = ctx.watch<InternetCubit>().state;
 
               return Text(
